@@ -3,6 +3,8 @@ import {signInToken} from '../utils/token.js'
 
 
 export const signUp = async (req, res) => {
+    console.log('>>>>>>>>>', req.body);
+    
     try {
 
         const {email, password} = req.body;
@@ -31,11 +33,15 @@ export const signUp = async (req, res) => {
         const user = await User.create(req.body);
         const token = signInToken(user);
 
+        let userWithoutPswd = user.toObject();
+        delete userWithoutPswd.password;
+
+
         res.status(201).json({
             message: 'User creates successfully',
             success: true,
             token,
-            user
+            user: userWithoutPswd
         })
 
         
@@ -45,5 +51,40 @@ export const signUp = async (req, res) => {
             error: error.message,
             message: 'Signup failed'
         });
+    }
+}
+
+export const signIn = async (req, res) => {
+    try {
+
+        const {email, password} = req.body;
+        const user = await User.findOne({email});
+
+        if (!user || !(await user.comparePswd(password))) {
+            res.status(401).json({  
+            success: false,
+            message: 'Invalid Credentials'
+        })
+        }
+
+        let userWithoutPswd = user.toObject();
+        delete userWithoutPswd.password;
+
+
+        const token = signInToken(user);
+
+        res.status(201).json({
+            message: 'SignIn successfully!',
+            success: true,
+            token,
+            user: userWithoutPswd
+        })
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message,
+            message: 'SignIn failed'
+        })
     }
 }
