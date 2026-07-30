@@ -1,5 +1,6 @@
 import {Router} from "express";
-import { signUp, signIn } from '../controller/authController.js';
+import {profile, signUp, signIn } from '../controller/authController.js';
+import {middlewareToProtect} from '../middlewares/authMiddleware.js';
 
 
 
@@ -7,5 +8,7 @@ const router = Router();
 
 router.post('/signup', signUp);
 router.post('/signin', signIn);
+router.get('/profile', middlewareToProtect, profile);
 
 export default router;
+

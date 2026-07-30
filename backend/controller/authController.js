@@ -84,7 +84,17 @@ export const signIn = async (req, res) => {
         res.status(500).json({
             success: false,
             error: error.message,
-            message: 'SignIn failed'
+            message: 'Signin Failed'
         })
     }
+}
+
+
+
+
+
+//////// profile 
+
+export const profile = (req, res) => {
+    res.status(200).json({ success: true, user: req.user })
 }
