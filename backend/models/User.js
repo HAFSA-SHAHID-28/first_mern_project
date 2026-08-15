@@ -34,7 +34,7 @@ const userScema = mongoose.Schema({
         default: 'active'
     }
 }, {
-    timestamp: true
+    timestamps: true
 });
 
 userScema.pre("save", async function (next) {
