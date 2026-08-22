@@ -8,7 +8,7 @@ import {
   MdChevronRight,
 } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
-import { IoSettingsOutline, IoPeopleOutline } from "react-icons/io5";
+import {  IoPeopleOutline } from "react-icons/io5";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { LuMessageSquareText } from "react-icons/lu";
 import { RxCross2 } from "react-icons/rx";
