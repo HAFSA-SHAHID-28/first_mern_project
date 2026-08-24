@@ -1,5 +1,6 @@
 import User from '../models/User.js';
-import {signInToken} from '../utils/token.js'
+import {signInToken} from '../utils/token.js';
+import _sendEmail from '../utils/Email.js'
 
 
 export const signUp = async (req, res) => {
@@ -89,7 +90,48 @@ export const signIn = async (req, res) => {
     }
 }
 
+export const forgotPswd = async (req, res) => {
+    const {email} = req.body;
+    const user = await User.findOne({email});
 
+    if (!user) {
+        return res.status(404).json({
+            success: false,
+            message: "User not found"
+        })
+        
+    }
+
+
+/////// reset pswd token
+const resetToken = jwt.sign({id:user._id}, process.env.JWT_SECRET,{expiresIn:'2m'});
+
+try {
+
+await _sendEmail({
+  to: user.email,
+  subject:'Reset Password',
+  html: `
+  
+    <div style="width: 90%; margin: 0 auto;">
+    <h1>Reset Password</h1>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt, dolore mollitia quia delectus saepe id.</p>
+    <p>Click here to reset password : <a style="color: green; text-decoration: none;" href="">Reset</a></p>
+  </div>
+  
+  `
+})
+
+  
+} catch (error) {
+  res.status(500).json({
+    success:false,
+    message:'Email send failed'
+  })
+}
+
+
+}
 
 
 
