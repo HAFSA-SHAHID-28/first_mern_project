@@ -5,24 +5,25 @@ import { useAuthContext } from "../context/AuthContext";
 
 function DashboardLayout() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-
-  const { loading } = useAuthContext();
-  if (loading) {
-    return (
-      <>
-        <h1>Loading...</h1>
-      </>
-    );
+  
+  const { loading} = useAuthContext();
+  if(loading){
+     return (
+    <>
+     <h1> Loading... </h1>
+    </>
+  )
   }
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar /////////////// */}
+      {/* Sidebar//////////////  */}
       <Sidebar isMobileOpen={isMobileOpen} setIsMobileOpen={setIsMobileOpen} />
 
-      {/* ///////// main content */}
-      <div className={`flex flex-col flex-1`}>
-        {/* //////////////////  dashboard content */}
+      {/* /// main contrnt */}
+      <div className={`flex flex-col flex-1 `}>
+
+        {/* //////// dashboard content /////// */}
         <main className="p-4">
           <Outlet />
         </main>

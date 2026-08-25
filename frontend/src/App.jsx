@@ -17,7 +17,9 @@ if (loading) {
   return (
     <>
     <Navbar />
+    <div className="mt-18">
     <Outlet />
+    </div>
     <Footer />
     </>
   )

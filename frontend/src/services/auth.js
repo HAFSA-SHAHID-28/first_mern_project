@@ -1,15 +1,13 @@
-import axios from 'axios';
-import {getToken} from '../utils/auth';
-
+import axios from "axios";
+import {getToken} from "../utils/auth";
 
 export const fetchUserFromServer = async () => {
-    const token = getToken();
-    if (!token) return null;
+  const token = getToken();
+  if (!token) return null;
 
+  const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/profile`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
-    const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/auth/profile`, {
-        headers: { Authorization: `Bearer ${token}`},
-    });
-
-    return res.data.user;
+  return res.data.user;
 };

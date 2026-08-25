@@ -1,11 +1,12 @@
-import { useContext, createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react"
 import { getToken } from "../utils/auth";
 import { fetchUserFromServer } from "../services/auth";
 import { setUser as User } from "../utils/auth";
 
+
 const AuthContext = createContext();
 
-//// provider
+// provider
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -18,27 +19,31 @@ export const AuthProvider = ({ children }) => {
     }
     try {
       const user = await fetchUserFromServer();
-      setUser(user);
-      User(user);
+      setUser(user)
+      User(user); 
     } catch (error) {
-      console.log("error is fetching user ", error.message);
+      console.log("error in fetching user ", error.message);
+
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   useEffect(() => {
     loadUser();
-  }, []);
+  }, [])
+
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading }}>
+    <AuthContext.Provider value={{ user, setUser, loading }}  >
       {children}
     </AuthContext.Provider>
-  );
-};
-
-///// consume
-export const useAuthContext = () => useContext(AuthContext);
+  )
 
 
+}
+
+
+
+/// consume
+export const useAuthContext = ()=>useContext(AuthContext);
