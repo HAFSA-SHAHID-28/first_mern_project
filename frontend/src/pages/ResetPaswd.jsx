@@ -15,6 +15,8 @@ const ResetPaswd = () => {
     e.preventDefault();
     try {
 
+      
+
       const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/reset-pswd`, { token, password });
 
       setPassword("")
