@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { middlewareToProtect } from "../middlewares/authMiddleware.js";
-import { createblog, getBlogById, getMyBlogs, getPublicBlogs, updateBlog } from "../controller/Blogcontroller.js";
+import { createblog, getBlogById, getMyBlogs, getPublicBlogs, updateBlog } from "../controller/BlogController.js";
 import multer from 'multer'
 
 const blogRouter = Router();
