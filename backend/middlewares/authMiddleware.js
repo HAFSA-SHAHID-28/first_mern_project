@@ -31,5 +31,3 @@ export const authorize = (role) => {
     next();
   };
 };
-
-

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authorize, middlewareToProtect } from "../middlewares/authMidleware.js";
+import { authorize, middlewareToProtect } from "../middlewares/authMiddleware.js";
 import { getAdminBlogs } from "../controller/adminController.js";
 
 const router = Router();
